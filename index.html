@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ТПГ «ГенИИ» — Паспорт и обоснование</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --surface-2: #f4f4f5;
+    --surface-3: #e4e4e7;
+    --fg: #09090b;
+    --fg-2: #27272a;
+    --muted: #71717a;
+    --muted-2: #a1a1aa;
+    --border: #e4e4e7;
+    --border-strong: #d4d4d8;
+    --accent: #2563eb;
+    --accent-soft: #dbeafe;
+    --accent-2: #1d4ed8;
+    --success: #059669;
+    --success-soft: #d1fae5;
+    --warn: #d97706;
+    --warn-soft: #fef3c7;
+    --radius-sm: 10px;
+    --radius: 14px;
+    --radius-lg: 18px;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow: 0 4px 14px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+    --shadow-lg: 0 20px 40px -12px rgba(15, 23, 42, 0.12);
+    --font: system-ui, -apple-system, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --container: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection { background: var(--accent-soft); color: var(--accent-2); }
+
+  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Progress bar */
+  .progress-bar {
+    position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+    background: var(--accent); z-index: 100; transition: width 0.1s linear;
+  }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 250, 250, 0.8);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: var(--container); margin: 0 auto;
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 14px; letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+  .nav-logo {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), #6366f1);
+    display: grid; place-items: center;
+    color: white; font-weight: 700; font-size: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-links {
+    display: flex; gap: 4px; margin-left: auto;
+    overflow-x: auto; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link {
+    padding: 8px 12px; border-radius: 8px;
+    font-size: 13px; color: var(--muted);
+    white-space: nowrap; transition: all 0.15s;
+    font-weight: 500;
+  }
+  .nav-link:hover { color: var(--fg); background: var(--surface-2); text-decoration: none; }
+  .nav-link.active { color: var(--accent-2); background: var(--accent-soft); }
+  .nav-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Layout */
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; scroll-margin-top: 72px; }
+  section + section { border-top: 1px solid var(--border); }
+
+  /* Hero */
+  .hero { padding: 80px 0 40px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--surface); border: 1px solid var(--border);
+    font-size: 12px; color: var(--muted); font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--success); box-shadow: 0 0 0 3px var(--success-soft);
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.05; letter-spacing: -0.03em;
+    font-weight: 700; margin: 0 0 16px;
+    color: var(--fg);
+  }
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--accent), #6366f1);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--muted); max-width: 720px;
+    line-height: 1.5; margin: 0 0 32px;
+  }
+
+  .passport-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px; margin-top: 32px;
+  }
+  .passport-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    transition: all 0.2s;
+  }
+  .passport-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+  .passport-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); font-weight: 600; margin-bottom: 6px;
+  }
+  .passport-value { font-size: 15px; font-weight: 500; color: var(--fg-2); }
+
+  /* Section header */
+  .section-head { margin-bottom: 40px; }
+  .section-num {
+    display: inline-block;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 700; letter-spacing: -0.02em;
+    line-height: 1.15; margin: 0 0 12px;
+  }
+  .section-lead {
+    font-size: 17px; color: var(--muted); max-width: 720px;
+    line-height: 1.55; margin: 0;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 24px;
+    transition: all 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow); }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+
+  /* Accordion */
+  .accordion { display: flex; flex-direction: column; gap: 10px; }
+  .acc-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    transition: all 0.2s;
+  }
+  .acc-item.open { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .acc-trigger {
+    width: 100%; padding: 18px 20px;
+    display: flex; align-items: center; gap: 14px;
+    text-align: left; font-size: 15px; font-weight: 500;
+    color: var(--fg); transition: background 0.15s;
+    min-height: 44px;
+  }
+  .acc-trigger:hover { background: var(--surface-2); }
+  .acc-trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .acc-icon {
+    width: 32px; height: 32px; flex-shrink: 0;
+    border-radius: 8px; background: var(--accent-soft);
+    color: var(--accent-2);
+    display: grid; place-items: center;
+  }
+  .acc-title { flex: 1; }
+  .acc-chevron {
+    width: 20px; height: 20px; color: var(--muted);
+    transition: transform 0.25s;
+  }
+  .acc-item.open .acc-chevron { transform: rotate(180deg); color: var(--accent); }
+  .acc-content {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .acc-item.open .acc-content { max-height: 800px; }
+  .acc-body {
+    padding: 0 20px 20px 66px;
+    color: var(--fg-2); font-size: 14.5px; line-height: 1.6;
+  }
+  .acc-body ul { margin: 8px 0 0; padding-left: 18px; }
+  .acc-body li { margin-bottom: 6px; }
+  .acc-body strong { color: var(--fg); font-weight: 600; }
+
+  /* Formula block */
+  .formula {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white; border-radius: var(--radius-lg);
+    padding: 32px; margin: 24px 0;
+    position: relative; overflow: hidden;
+  }
+  .formula::before {
+    content: ''; position: absolute; top: -50%; right: -20%;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,130,246,0.25), transparent 70%);
+    pointer-events: none;
+  }
+  .formula-label {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.6); font-weight: 600; margin-bottom: 14px;
+    position: relative;
+  }
+  .formula-text {
+    font-size: clamp(15px, 2.2vw, 19px); line-height: 1.6;
+    position: relative; font-weight: 400;
+  }
+  .formula-text .hl {
+    color: #93c5fd; font-weight: 600;
+    padding: 2px 6px; border-radius: 4px;
+    background: rgba(59,130,246,0.15);
+  }
+
+  /* Criteria chips */
+  .criteria-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .criteria-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius);
+  }
+  .criteria-row .check {
+    width: 22px; height: 22px; flex-shrink: 0;
+    border-radius: 50%; background: var(--success-soft);
+    color: var(--success); display: grid; place-items: center;
+  }
+  .criteria-row .label { font-weight: 500; font-size: 14.5px; }
+  .criteria-row .desc { color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+  /* Team grid */
+  .team-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .member {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    transition: all 0.2s;
+  }
+  .member:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+  .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 600; font-size: 13px; color: white;
+    flex-shrink: 0;
+  }
+  .member-info { min-width: 0; }
+  .member-name {
+    font-size: 13.5px; font-weight: 500; color: var(--fg);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .member-role {
+    font-size: 11.5px; color: var(--muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* Timeline */
+  .timeline {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px; margin-top: 24px; position: relative;
+  }
+  .tl-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px;
+    position: relative; transition: all 0.2s;
+  }
+  .tl-item:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .tl-item::before {
+    content: ''; position: absolute; top: -8px; left: 18px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .tl-period {
+    font-size: 12px; font-weight: 600; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .tl-title { font-size: 14px; font-weight: 600; color: var(--fg); }
+
+  /* Risks */
+  .risk-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .risk-card:hover { border-color: var(--warn); }
+  .risk-card.open { border-color: var(--warn); background: var(--warn-soft); }
+  .risk-head {
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .risk-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: var(--warn-soft); color: var(--warn);
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .risk-card.open .risk-icon { background: white; }
+  .risk-title { font-weight: 600; font-size: 14.5px; flex: 1; }
+  .risk-hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .risk-mitigation {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px dashed var(--border-strong);
+    font-size: 13.5px; color: var(--fg-2); line-height: 1.55;
+    display: none;
+  }
+  .risk-card.open .risk-mitigation { display: block; }
+  .risk-mitigation strong { color: var(--success); font-weight: 600; }
+
+  /* Thesis cards */
+  .thesis-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 24px;
+    transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .thesis-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--border-strong); }
+  .thesis-num {
+    font-size: 11px; font-weight: 700; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+  .thesis-q {
+    font-size: 15px; font-weight: 600; color: var(--fg);
+    margin: 0 0 10px; line-height: 1.35;
+  }
+  .thesis-a {
+    font-size: 14.5px; color: var(--fg-2); line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Metrics */
+  .metrics {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px; margin-top: 24px;
+  }
+  .metric {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .metric-label {
+    font-size: 12px; color: var(--muted); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .metric-value {
+    font-size: 28px; font-weight: 700; color: var(--fg);
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .metric-unit { font-size: 14px; color: var(--muted); font-weight: 500; margin-left: 4px; }
+  .metric-hint { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0; margin-top: 40px;
+    background: var(--surface);
+  }
+  .footer-inner {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: space-between; align-items: center;
+  }
+  .footer-text { font-size: 13px; color: var(--muted); }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    section { padding: 48px 0; }
+    .hero { padding: 48px 0 24px; }
+    .nav-inner { padding: 12px 16px; }
+    .container { padding: 0 16px; }
+    .nav-brand span.brand-text { display: none; }
+    .nav-link { padding: 7px 10px; font-size: 12.5px; }
+    .card { padding: 18px; }
+    .formula { padding: 22px; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .acc-body { padding: 0 16px 16px 16px; }
+    .team-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 400px) {
+    .timeline { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="nav" aria-label="Основная навигация">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-logo">Г</div>
+      <span class="brand-text">ТПГ «ГенИИ»</span>
+    </div>
+    <div class="nav-links" id="navLinks"></div>
+  </div>
+</nav>
+
+<main id="app"></main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-text">ЧОУ «ОК Точка будущего» · ТПГ «ГенИИ» · 2026/2027 учебный год</div>
+    <div class="footer-text">Куратор: Масликов М.М. · Заказчик: Никулин Е.Е.</div>
+  </div>
+</footer>
+
+<script>
+  // ====== DATA ======
+  const NAV = [
+    { id: 'hero', label: 'Паспорт' },
+    { id: 'stage1', label: 'Проблема' },
+    { id: 'stage2', label: 'Тема' },
+    { id: 'stage3', label: 'Актуальность' },
+    { id: 'stage4', label: 'Цели и продукт' },
+    { id: 'stage5', label: 'Ресурсы' },
+    { id: 'stage6', label: 'Тезисы' }
+  ];
+
+  const PASSPORT = {
+    customer: 'руководитель старшей школы Никулин Е.Е.',
+    curator: 'учитель информатики Масликов М.М.',
+    name: '«ГенИИ»',
+    fullName: 'Исследование актуальных сервисов ИИ и создание современных образовательных продуктов',
+    goal: 'Создание системы эффективного использования технологий ИИ в образовательном процессе, методической работе и проектной деятельности ЧОУ «ОК Точка будущего».'
+  };
+
+  const STAGE1 = {
+    problem: 'Отсутствие системного подхода к интеграции ИИ в ежедневную практику педагогов; разрыв между высоким интересом к нейросетям и реальным их применением для создания образовательных продуктов.',
+    items: [
+      {
+        icon: 'alert',
+        title: 'Что именно не устраивает в текущей практике?',
+        body: 'Стихийное использование ИИ (только для личных нужд или эпизодически), большие временные затраты учителей на рутину (составление отчетов, базовых конспектов, презентаций), отсутствие единых стандартов качества ИИ-контента.'
+      },
+      {
+        icon: 'users',
+        title: 'Чьи интересы затрагиваются?',
+        body: '<ul><li><strong>Педагоги:</strong> выгорание от рутины, нехватка времени на творчество, недостаток современного, персонализированного и эффективного контента.</li><li><strong>Обучающиеся:</strong> получение шаблонного, неперсонализированного контента.</li><li><strong>Администрация:</strong> сложность аналитики и контроля, необходимость удержания статуса инновационной школы.</li></ul>'
+      },
+      {
+        icon: 'trend',
+        title: 'Как проблема проявляется сегодня и что будет, если её не решать?',
+        body: 'Сегодня — низкая скорость создания качественного методического продукта. Если не решать — отставание от образовательных трендов, снижение мотивации педагогов и обучающихся, риски утечки данных при использовании непроверенных ИИ-сервисов.'
+      },
+      {
+        icon: 'search',
+        title: 'Анализ причин',
+        body: '<ul><li><strong>Кадровые / мотивационные:</strong> страх перед технологиями, отсутствие культуры горизонтального обмена опытом («каждый сам за себя»).</li><li><strong>Организационные:</strong> нет формата, где педагоги могли бы вместе создавать продукты, а не просто слушать лекции.</li><li><strong>Педагогические:</strong> дефицит навыков промпт-инжиниринга и проектирования сайтов/продуктов с нуля.</li></ul>'
+      },
+      {
+        icon: 'doc',
+        title: 'Подтверждение фактами',
+        body: '<ul><li>Высокий запрос по итогам входного мастер-класса «Инструменты современного учителя» Масликова М.М., но низкий процент педагогов, внедривших ИИ в системную практику.</li><li><strong>Нормативная база:</strong><ul><li>ФГОС СОО (требования к цифровой образовательной среде);</li><li>Профстандарт педагога (ИКТ-компетентность);</li><li>Программа развития ЧОУ «Точка будущего».</li></ul></li></ul>'
+      }
+    ]
+  };
+
+  const STAGE2 = {
+    theme: 'Проектирование и внедрение системы использования технологий ИИ для оптимизации работы педагога и создания современных образовательных продуктов в условиях статуса инновационной школы.',
+    formula: {
+      what: 'Повышение качества образовательных продуктов',
+      how: 'проектирование с использованием генеративного ИИ',
+      where: 'горизонтального со-творчества сотрудников из разных сфер комплекса'
+    },
+    criteria: [
+      { label: 'Актуальность', desc: 'ИИ — главный драйвер изменений в образовании 2024–2026 гг.' },
+      { label: 'Новизна', desc: 'Переход от пассивного потребления ИИ-сервисов к созданию собственных методических продуктов и сайтов.' },
+      { label: 'Практическая значимость', desc: 'Готовые шаблоны, сайты и алгоритмы, которые экономят часы рабочего времени.' },
+      { label: 'Реализуемость', desc: 'Наличие команды единомышленников, доступность нейросетей и вспомогательных сайтов на территории РФ/ОК.' },
+      { label: 'Соответствие стратегии', desc: 'Полное соответствие вектору ЧОУ «Точка будущего» на инновационность и создание передовой образовательной экосистемы.' }
+    ]
+  };
+
+  const STAGE3 = [
+    {
+      icon: 'book',
+      title: 'Научно-теоретическая база',
+      text: 'Концепции персонализированного обучения, теории конструктивизма (обучение через создание продукта), методология Peer-to-Peer (взаимообучение в профессиональных сообществах).'
+    },
+    {
+      icon: 'target',
+      title: 'Практическая потребность',
+      text: 'Запрос педагогов на «лайфхаки» и готовые алгоритмы для экономии времени и повышения интерактивности создаваемых продуктов.'
+    },
+    {
+      icon: 'spark',
+      title: 'Внутренние предпосылки',
+      text: 'Сформирован пул активных педагогов, готовых работать в формате ТПГ (где каждый делится опытом, а не просто слушает куратора). Есть руководитель (Масликов М.М.) с подтвержденной экспертизой.'
+    }
+  ];
+
+  const STAGE4 = {
+    goal: 'Спроектировать и внедрить банк современных образовательных продуктов (методичек, сайтов, презентаций) и регламентов автоматизации рутины, созданных педагогами школы с помощью ИИ.',
+    tasks: [
+      'Обучить членов ТПГ и сотрудников ОК навыкам промпт-инжиниринга и анализа больших данных.',
+      'Спроектировать и запустить образовательные сайты/портфолио проектов.',
+      'Разработать систему ИИ-шаблонов для ускорения методической работы.'
+    ],
+    products: [
+      'Банк промптов для педагогов ЧОУ «Точка будущего».',
+      'Пакет ИИ-методичек и интерактивных презентаций.',
+      'Реестр ИИ-инструментов для автоматизации отчетности и проверки работ.'
+    ],
+    metrics: [
+      { label: 'Экономия времени', value: '−40', unit: '%', hint: 'на подготовку к уроку и отчетности' },
+      { label: 'Создано продуктов', value: '50+', unit: '', hint: 'методичек, сайтов, презентаций за год' },
+      { label: 'Педагоги с ИИ', value: '80', unit: '%', hint: 'используют нейросети еженедельно' },
+      { label: 'Участников ТПГ', value: '18', unit: '', hint: 'из разных областей' }
+    ]
+  };
+
+  const TEAM = [
+    { name: 'Масликов Михаил', role: 'Учитель информатики · Куратор', color: '#2563eb' },
+    { name: 'Гармышева Анастасия', role: 'Тьютор', color: '#7c3aed' },
+    { name: 'Ермолаева Ирина', role: 'Учитель английского языка', color: '#0891b2' },
+    { name: 'Денисов Егор', role: 'Учитель английского языка', color: '#0891b2' },
+    { name: 'Ярмухаметова Мария', role: 'Учитель немецкого и англ. языков', color: '#0891b2' },
+    { name: 'Табунова Анна', role: 'Учитель англ. и фр. языков', color: '#0891b2' },
+    { name: 'Шигарова Ирина', role: 'Учитель английского языка', color: '#0891b2' },
+    { name: 'Федюшкина Елена', role: 'Учитель истории', color: '#b45309' },
+    { name: 'Казакова Ксения', role: 'Учитель англ. и кит. языков', color: '#0891b2' },
+    { name: 'Русакова Светлана', role: 'Учитель начальных классов', color: '#059669' },
+    { name: 'Вахромеева Наталья', role: 'Педагог-организатор', color: '#dc2626' },
+    { name: 'Куроедова Наталья', role: 'Учитель рус. яз. и литературы', color: '#be185d' },
+    { name: 'Андреева Юлия', role: 'Учитель английского языка', color: '#0891b2' },
+    { name: 'Нелепова Светлана', role: 'Учитель рус. яз. и литературы', color: '#be185d' },
+    { name: 'Тимофеев Семен', role: 'Педагог-психолог', color: '#7c3aed' },
+    { name: 'Канчер Виктория', role: 'Руководитель СПС', color: '#7c3aed' },
+    { name: 'Истомин Вадим', role: 'Педагог-организатор', color: '#dc2626' },
+    { name: 'Никулин Егор', role: 'Руководитель старшей школы · Заказчик', color: '#0f172a' }
+  ];
+
+  const TIMELINE = [
+    { period: 'Сентябрь — Октябрь', title: 'Аудит и обучение' },
+    { period: 'Ноябрь — Февраль', title: 'Проектирование продуктов' },
+    { period: 'Март — Апрель', title: 'Апробация' },
+    { period: 'Май', title: 'Защита и масштабирование' }
+  ];
+
+  const RISKS = [
+    { title: 'Сопротивление консервативной части коллектива', mitigation: 'Демонстрация результатов через микро-кейсы.' },
+    { title: 'Нарушение этики и безопасности данных', mitigation: 'Создание и утверждение «Памятки по ИИ-гигиене» (запрет на загрузку ФИО и оценок учеников в открытые нейросети).' },
+    { title: 'Выгорание участников из-за загруженности', mitigation: 'Задачи ТПГ интегрируются в текущую работу (делаем то, что и так нужно, но быстрее с помощью ИИ).' },
+    { title: 'Блокировка / сбои сервисов', mitigation: 'Создание базы аналогов и оффлайн-шаблонов.' }
+  ];
+
+  const THESIS = [
+    { q: 'В чём проблема?', a: 'Педагоги тонут в рутине, ИИ используется хаотично, школа упускает возможности персонализации.' },
+    { q: 'Тема и смысл', a: 'ТПГ «ГенИИ» — это не курсы повышения квалификации, а лаборатория, где сами создают инструменты для себя, коллег и обучающихся.' },
+    { q: 'Цель и продукт', a: 'Банк готовых ИИ-решений, сайтов и методичек, снижающих нагрузку и повышающих эффективность.' },
+    { q: 'Ресурсы', a: 'Команда уже собрана, инфраструктура школы позволяет.' },
+    { q: 'Выгода для ЧОУ', a: 'Экономия времени педагогов, статус инновационной площадки, повышение качества образовательного контента.' },
+    { q: 'Почему это нужно сейчас?', a: 'Потому что ученики уже используют ИИ (в т.ч. для списывания). Школа должна задать стандарты и превратить ИИ из «врага» в «инструмент».' },
+    { q: 'В чём новизна?', a: 'В создании собственных интерактивных сайтов и образовательных методик, а не презентаций в формате 4:3 с картинками 2005 года.' }
+  ];
+
+  // ====== ICONS ======
+  const ICONS = {
+    alert: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    users: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    trend: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+    search: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
+    doc: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+    book: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+    target: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+    spark: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>',
+    check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+    chevron: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
+    warn: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    shield: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+  };
+
+  // ====== STATE ======
+  const state = {
+    openAcc: new Set([0]),
+    openRisks: new Set()
+  };
+
+  // ====== HELPERS ======
+  function initials(name) {
+    return name.split(' ').filter(Boolean).slice(0, 2).map(s => s[0]).join('').toUpperCase();
+  }
+
+  function el(tag, attrs = {}, children = []) {
+    const node = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === 'class') node.className = v;
+      else if (k === 'html') node.innerHTML = v;
+      else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
+      else if (v !== undefined && v !== null) node.setAttribute(k, v);
+    }
+    for (const c of [].concat(children)) {
+      if (c == null) continue;
+      node.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    }
+    return node;
+  }
+
+  // ====== RENDER ======
+  function renderNav() {
+    const wrap = document.getElementById('navLinks');
+    wrap.innerHTML = '';
+    NAV.forEach(n => {
+      const a = el('a', { href: '#' + n.id, class: 'nav-link', 'data-nav': n.id }, n.label);
+      wrap.appendChild(a);
+    });
+  }
+
+  function renderHero() {
+    const p = PASSPORT;
+    return el('section', { id: 'hero', class: 'hero' }, [
+      el('div', { class: 'container' }, [
+        el('div', { class: 'hero-eyebrow' }, [
+          el('span', { class: 'dot' }),
+          el('span', {}, 'Творческая проектировочная группа · 2025/2026')
+        ]),
+        el('h1', {}, [
+          'ТПГ ',
+          el('span', { class: 'accent' }, '«ГенИИ»')
+        ]),
+        el('p', { class: 'hero-sub' }, p.fullName),
+        el('div', { class: 'passport-grid' }, [
+          passportCard('Заказчик', p.customer),
+          passportCard('Куратор', p.curator),
+          passportCard('Название', p.name),
+          passportCard('Глобальная цель', p.goal)
+        ])
+      ])
+    ]);
+  }
+
+  function passportCard(label, value) {
+    return el('div', { class: 'passport-card' }, [
+      el('div', { class: 'passport-label' }, label),
+      el('div', { class: 'passport-value' }, value)
+    ]);
+  }
+
+  function sectionHead(num, title, lead) {
+    return el('div', { class: 'section-head' }, [
+      el('div', { class: 'section-num' }, num),
+      el('h2', { class: 'section-title' }, title),
+      lead ? el('p', { class: 'section-lead' }, lead) : null
+    ]);
+  }
+
+  function renderStage1() {
+    const acc = el('div', { class: 'accordion' });
+    STAGE1.items.forEach((item, i) => {
+      const row = el('div', { class: 'acc-item' + (state.openAcc.has(i) ? ' open' : '') });
+      const trigger = el('button', {
+        class: 'acc-trigger',
+        'aria-expanded': state.openAcc.has(i) ? 'true' : 'false',
+        onclick: () => {
+          if (state.openAcc.has(i)) state.openAcc.delete(i);
+          else state.openAcc.add(i);
+          renderStage1Content();
+        }
+      }, [
+        el('span', { class: 'acc-icon', html: ICONS[item.icon] }),
+        el('span', { class: 'acc-title' }, item.title),
+        el('span', { class: 'acc-chevron', html: ICONS.chevron })
+      ]);
+      const content = el('div', { class: 'acc-content' }, [
+        el('div', { class: 'acc-body', html: item.body })
+      ]);
+      row.appendChild(trigger);
+      row.appendChild(content);
+      acc.appendChild(row);
+    });
+
+    return el('section', { id: 'stage1' }, [
+      el('div', { class: 'container' }, [
+        sectionHead('Этап 01', 'Выявление и анализ проблемы', STAGE1.problem),
+        el('div', { id: 'stage1-acc' }, [acc])
+      ])
+    ]);
+  }
+
+  function renderStage1Content() {
+    const host = document.getElementById('stage1-acc');
+    if (!host) return;
+    const fresh = renderStage1().querySelector('.container > .accordion') || renderStage1().querySelector('.accordion');
+    // re-render whole section is simpler:
+    const section = renderStage1();
+    host.parentElement.replaceChild(section.querySelector('.container'), host.parentElement.querySelector('.container'));
+  }
+
+  function renderStage2() {
+    const f = STAGE2.formula;
+    const formula = el('div', { class: 'formula' }, [
+      el('div', { class: 'formula-label' }, 'Формула темы'),
+      el('div', { class: 'formula-text', html:
+        `«<span class="hl">${f.what}</span>» через «<span class="hl">${f.how}</span>» в условиях «<span class="hl">${f.where}</span>».`
+      })
+    ]);
+
+    const criteria = el('div', { class: 'criteria-list' });
+    STAGE2.criteria.forEach(c => {
+      criteria.appendChild(el('div', { class: 'criteria-row' }, [
+        el('span', { class: 'check', html: ICONS.check }),
+        el('div', {}, [
+          el('div', { class: 'label' }, c.label),
+          el('div', { class: 'desc' }, c.desc)
+        ])
+      ]));
+    });
+
+    return el('section', { id: 'stage2' }, [
+      el('div', { class: 'container' }, [
+        sectionHead('Этап 02', 'Формулирование темы', 'Перевод проблемы в конкретную тему с проверкой по пяти критериям.'),
+        el('div', { class: 'card' }, [
+          el('div', { class: 'passport-label' }, 'Тема ТПГ'),
+          el('div', { style: 'font-size:17px;font-weight:500;line-height:1.5;color:var(--fg)' }, STAGE2.theme)
+        ]),
+        formula,
+        el('h3', { style: 'font-size:18px;font-weight:600;margin:28px 0 4px;letter-spacing:-0.01em' }, 'Проверка по критериям'),
+        criteria
+      ])
+    ]);
+  }
+
+  function renderStage3() {
+    const grid = el('div', { class: 'grid-3' });
+    STAGE3.forEach(item => {
+      grid.appendChild(el('div', { class: 'card' }, [
+        el('div', { class: 'acc-icon', style: 'margin-bottom:14px', html: ICONS[item.icon] }),
+        el('h3', { style: 'font-size:16px;font-weight:600;margin:0 0 8px;letter-spacing:-0.01em' }, item.title),
+        el('p', { style: 'margin:0;color:var(--fg-2);font-size:14.5px;line-height:1.55' }, item.text)
+      ]));
+    });
+    return el('section', { id: 'stage3' }, [
+      el('div', { class: 'container' }, [
+        sectionHead('Этап 03', 'Обоснование актуальности', 'Три основания, на которых держится тема: наука, практика и внутренняя готовность.'),
+        grid
+      ])
+    ]);
+  }
+
+  function renderStage4() {
+    const metrics = el('div', { class: 'metrics' });
+    STAGE4.metrics.forEach(m => {
+      metrics.appendChild(el('div', { class: 'metric' }, [
+        el('div', { class: 'metric-label' }, m.label),
+        el('div', {}, [
+          el('span', { class: 'metric-value' }, m.value),
+          el('span', { class: 'metric-unit' }, m.unit)
+        ]),
+        el('div', { class: 'metric-hint' }, m.hint)
+      ]));
+    });
+
+    const tasks = el('div', { class: 'card' });
+    tasks.appendChild(el('div', { class: 'passport-label' }, 'Задачи'));
+    const ul = el('ul', { style: 'margin:10px 0 0;padding-left:18px' });
+    STAGE4.tasks.forEach(t => ul.appendChild(el('li', { style: 'margin-bottom:8px;color:var(--fg-2)' }, t)));
+    tasks.appendChild(ul);
+
+    const products = el('div', { class: 'card' });
+    products.appendChild(el('div', { class: 'passport-label' }, 'Планируемый продукт'));
+    const ul2 = el('ul', { style: 'margin:10px 0 0;padding-left:18px' });
+    STAGE4.products.forEach(t => ul2.appendChild(el('li', { style: 'margin-bottom:8px;color:var(--fg-2)' }, t)));
+    products.appendChild(ul2);
+
+    return el('section', { id: 'stage4' }, [
+      el('div', { class: 'container' }, [
+        sectionHead('Этап 04', 'Цели, задачи и ожидаемые результаты', STAGE4.goal),
+        metrics,
+        el('div', { class: 'grid-2', style: 'margin-top:20px' }, [tasks, products])
+      ])
+    ]);
+  }
+
+  function renderStage5() {
+    // Team
+    const teamGrid = el('div', { class: 'team-grid' });
+    TEAM.forEach(m => {
+      teamGrid.appendChild(el('div', { class: 'member' }, [
+        el('div', { class: 'avatar', style: 'background:' + m.color }, initials(m.name)),
+        el('div', { class: 'member-info' }, [
+          el('div', { class: 'member-name' }, m.name),
+          el('div', { class: 'member-role' }, m.role)
+        ])
+      ]));
+    });
+
+    // Timeline
+    const tl = el('div', { class: 'timeline' });
+    TIMELINE.forEach(t => {
+      tl.appendChild(el('div', { class: 'tl-item' }, [
+        el('div', { class: 'tl-period' }, t.period),
+        el('div', { class: 'tl-title' }, t.title)
+      ]));
+    });
+
+    // Risks
+    const risks = el('div', { class: 'grid-2' });
+    RISKS.forEach((r, i) => {
+      const card = el('div', {
+        class: 'risk-card' + (state.openRisks.has(i) ? ' open' : ''),
+        onclick: () => {
+          if (state.openRisks.has(i)) state.openRisks.delete(i);
+          else state.openRisks.add(i);
+          renderStage5Content();
+        },
+        role: 'button',
+        tabindex: '0',
+        'aria-expanded': state.openRisks.has(i) ? 'true' : 'false'
+      }, [
+        el('div', { class: 'risk-head' }, [
+          el('span', { class: 'risk-icon', html: ICONS.warn }),
+          el('div', { style: 'flex:1' }, [
+            el('div', { class: 'risk-title' }, r.title),
+            el('div', { class: 'risk-hint' }, 'Нажмите, чтобы увидеть минимизацию')
+          ])
+        ]),
+        el('div', { class: 'risk-mitigation', html: '<strong>Минимизация: </strong>' + r.mitigation })
+      ]);
+      risks.appendChild(card);
+    });
+
+    return el('section', { id: 'stage5' }, [
+      el('div', { class: 'container' }, [
+        sectionHead('Этап 05', 'Ресурсное обоснование', 'Кадры, время, инфраструктура и управление рисками.'),
+
+        el('h3', { style: 'font-size:17px;font-weight:600;margin:0 0 14px;letter-spacing:-0.01em' }, 'Состав ТПГ'),
+        el('div', { class: 'card', style: 'padding:18px' }, [teamGrid]),
+
+        el('h3', { style: 'font-size:17px;font-weight:600;margin:32px 0 4px;letter-spacing:-0.01em' }, 'График работы · 1 учебный год'),
+        el('p', { style: 'color:var(--muted);margin:0 0 8px;font-size:14.5px' }, 'Ресурсы: компьютерная инфраструктура школы, доступ к нейросетям (Qwen, DeepSeek и др.) и платформе для размещения сайтов (GitHub, GitVerse).'),
+        tl,
+
+        el('h3', { style: 'font-size:17px;font-weight:600;margin:32px 0 4px;letter-spacing:-0.01em' }, 'Риски и минимизация'),
+        el('div', { id: 'stage5-risks' }, [risks])
+      ])
+    ]);
+  }
+
+  function renderStage5Content() {
+    const host = document.getElementById('stage5-risks');
+    if (!host) return;
+    const section = renderStage5();
+    const fresh = section.querySelector('#stage5-risks');
+    host.parentElement.replaceChild(fresh, host);
+  }
+
+  function renderStage6() {
+    const grid = el('div', { class: 'grid-2' });
+    THESIS.forEach((t, i) => {
+      grid.appendChild(el('div', { class: 'thesis-card' }, [
+        el('div', { class: 'thesis-num' }, 'Тезис ' + String(i + 1).padStart(2, '0')),
+        el('p', { class: 'thesis-q' }, t.q),
+        el('p', { class: 'thesis-a' }, t.a)
+      ]));
+    });
+    return el('section', { id: 'stage6' }, [
+      el('div', { class: 'container' }, [
+        sectionHead('Этап 06', 'Тезисы', '7 ключевых ответов.'),
+        grid
+      ])
+    ]);
+  }
+
+  function render() {
+    const app = document.getElementById('app');
+    app.innerHTML = '';
+    app.appendChild(renderHero());
+    app.appendChild(renderStage1());
+    app.appendChild(renderStage2());
+    app.appendChild(renderStage3());
+    app.appendChild(renderStage4());
+    app.appendChild(renderStage5());
+    app.appendChild(renderStage6());
+  }
+
+  // ====== HANDLERS ======
+  function setupScrollSpy() {
+    const sections = NAV.map(n => document.getElementById(n.id)).filter(Boolean);
+    const links = document.querySelectorAll('.nav-link');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const id = e.target.id;
+          links.forEach(l => l.classList.toggle('active', l.getAttribute('data-nav') === id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    sections.forEach(s => io.observe(s));
+  }
+
+  function setupProgress() {
+    const bar = document.getElementById('progressBar');
+    const onScroll = () => {
+      const h = document.documentElement;
+      const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+      bar.style.width = Math.min(100, Math.max(0, scrolled * 100)) + '%';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ====== INIT ======
+  function init() {
+    renderNav();
+    render();
+    setupScrollSpy();
+    setupProgress();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>
+</body>
+</html>
