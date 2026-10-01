@@ -52,13 +52,11 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* Progress bar */
   .progress-bar {
     position: fixed; top: 0; left: 0; height: 2px; width: 0%;
     background: var(--accent); z-index: 100; transition: width 0.1s linear;
   }
 
-  /* Nav */
   .nav {
     position: sticky; top: 0; z-index: 50;
     background: rgba(250, 250, 250, 0.8);
@@ -99,12 +97,10 @@
   .nav-link.active { color: var(--accent-2); background: var(--accent-soft); }
   .nav-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  /* Layout */
   .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
   section { padding: 72px 0; scroll-margin-top: 72px; }
   section + section { border-top: 1px solid var(--border); }
 
-  /* Hero */
   .hero { padding: 80px 0 40px; }
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
@@ -150,7 +146,6 @@
   }
   .passport-value { font-size: 15px; font-weight: 500; color: var(--fg-2); }
 
-  /* Section header */
   .section-head { margin-bottom: 40px; }
   .section-num {
     display: inline-block;
@@ -168,7 +163,6 @@
     line-height: 1.55; margin: 0;
   }
 
-  /* Cards */
   .card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: 24px;
@@ -179,12 +173,11 @@
   .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
   .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 
-  /* Accordion */
   .accordion { display: flex; flex-direction: column; gap: 10px; }
   .acc-item {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius); overflow: hidden;
-    transition: all 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
   .acc-item.open { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
   .acc-trigger {
@@ -210,7 +203,7 @@
   .acc-item.open .acc-chevron { transform: rotate(180deg); color: var(--accent); }
   .acc-content {
     max-height: 0; overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.35s ease;
   }
   .acc-item.open .acc-content { max-height: 800px; }
   .acc-body {
@@ -221,7 +214,6 @@
   .acc-body li { margin-bottom: 6px; }
   .acc-body strong { color: var(--fg); font-weight: 600; }
 
-  /* Formula block */
   .formula {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     color: white; border-radius: var(--radius-lg);
@@ -249,7 +241,6 @@
     background: rgba(59,130,246,0.15);
   }
 
-  /* Criteria chips */
   .criteria-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
   .criteria-row {
     display: flex; align-items: center; gap: 14px;
@@ -264,7 +255,6 @@
   .criteria-row .label { font-weight: 500; font-size: 14.5px; }
   .criteria-row .desc { color: var(--muted); font-size: 13px; margin-top: 2px; }
 
-  /* Team grid */
   .team-grid {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 10px;
@@ -292,7 +282,6 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
-  /* Timeline */
   .timeline {
     display: grid; grid-template-columns: repeat(4, 1fr);
     gap: 12px; margin-top: 24px; position: relative;
@@ -315,7 +304,6 @@
   }
   .tl-title { font-size: 14px; font-weight: 600; color: var(--fg); }
 
-  /* Risks */
   .risk-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 18px 20px;
@@ -343,7 +331,6 @@
   .risk-card.open .risk-mitigation { display: block; }
   .risk-mitigation strong { color: var(--success); font-weight: 600; }
 
-  /* Thesis cards */
   .thesis-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: 24px;
@@ -365,7 +352,6 @@
     margin: 0;
   }
 
-  /* Metrics */
   .metrics {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 14px; margin-top: 24px;
@@ -386,7 +372,6 @@
   .metric-unit { font-size: 14px; color: var(--muted); font-weight: 500; margin-left: 4px; }
   .metric-hint { font-size: 13px; color: var(--muted); margin-top: 8px; }
 
-  /* Footer */
   footer {
     border-top: 1px solid var(--border);
     padding: 40px 0; margin-top: 40px;
@@ -398,7 +383,6 @@
   }
   .footer-text { font-size: 13px; color: var(--muted); }
 
-  /* Mobile */
   @media (max-width: 640px) {
     section { padding: 48px 0; }
     .hero { padding: 48px 0 24px; }
@@ -538,9 +522,9 @@
     ],
     metrics: [
       { label: 'Экономия времени', value: '−40', unit: '%', hint: 'на подготовку к уроку и отчетности' },
-      { label: 'Создано продуктов', value: '50+', unit: '', hint: 'методичек, сайтов, презентаций за год' },
+      { label: 'Создано продуктов', value: '20+', unit: '', hint: 'методичек, сайтов, презентаций за год' },
       { label: 'Педагоги с ИИ', value: '80', unit: '%', hint: 'используют нейросети еженедельно' },
-      { label: 'Участников ТПГ', value: '18', unit: '', hint: 'из разных областей' }
+      { label: 'Участников ТПГ', value: '18', unit: '', hint: 'из разных предметных областей' }
     ]
   };
 
@@ -581,9 +565,8 @@
 
   const THESIS = [
     { q: 'В чём проблема?', a: 'Педагоги тонут в рутине, ИИ используется хаотично, школа упускает возможности персонализации.' },
-    { q: 'Тема и смысл', a: 'ТПГ «ГенИИ» — это не курсы повышения квалификации, а лаборатория, где сами создают инструменты для себя, коллег и обучающихся.' },
+    { q: 'Тема и смысл', a: 'ТПГ «ГенИИ» — это не курсы и лекции, а лаборатория, где участники сами создают инструменты для себя, коллег и обучающихся.' },
     { q: 'Цель и продукт', a: 'Банк готовых ИИ-решений, сайтов и методичек, снижающих нагрузку и повышающих эффективность.' },
-    { q: 'Ресурсы', a: 'Команда уже собрана, инфраструктура школы позволяет.' },
     { q: 'Выгода для ЧОУ', a: 'Экономия времени педагогов, статус инновационной площадки, повышение качества образовательного контента.' },
     { q: 'Почему это нужно сейчас?', a: 'Потому что ученики уже используют ИИ (в т.ч. для списывания). Школа должна задать стандарты и превратить ИИ из «врага» в «инструмент».' },
     { q: 'В чём новизна?', a: 'В создании собственных интерактивных сайтов и образовательных методик, а не презентаций в формате 4:3 с картинками 2005 года.' }
@@ -603,12 +586,6 @@
     chevron: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
     warn: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
     shield: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
-  };
-
-  // ====== STATE ======
-  const state = {
-    openAcc: new Set([0]),
-    openRisks: new Set()
   };
 
   // ====== HELPERS ======
@@ -647,7 +624,7 @@
       el('div', { class: 'container' }, [
         el('div', { class: 'hero-eyebrow' }, [
           el('span', { class: 'dot' }),
-          el('span', {}, 'Творческая проектировочная группа · 2025/2026')
+          el('span', {}, 'Творческая проектировочная группа · 2026/2027')
         ]),
         el('h1', {}, [
           'ТПГ ',
@@ -682,15 +659,11 @@
   function renderStage1() {
     const acc = el('div', { class: 'accordion' });
     STAGE1.items.forEach((item, i) => {
-      const row = el('div', { class: 'acc-item' + (state.openAcc.has(i) ? ' open' : '') });
+      const row = el('div', { class: 'acc-item', 'data-acc': i });
       const trigger = el('button', {
         class: 'acc-trigger',
-        'aria-expanded': state.openAcc.has(i) ? 'true' : 'false',
-        onclick: () => {
-          if (state.openAcc.has(i)) state.openAcc.delete(i);
-          else state.openAcc.add(i);
-          renderStage1Content();
-        }
+        type: 'button',
+        'aria-expanded': i === 0 ? 'true' : 'false'
       }, [
         el('span', { class: 'acc-icon', html: ICONS[item.icon] }),
         el('span', { class: 'acc-title' }, item.title),
@@ -707,18 +680,9 @@
     return el('section', { id: 'stage1' }, [
       el('div', { class: 'container' }, [
         sectionHead('Этап 01', 'Выявление и анализ проблемы', STAGE1.problem),
-        el('div', { id: 'stage1-acc' }, [acc])
+        acc
       ])
     ]);
-  }
-
-  function renderStage1Content() {
-    const host = document.getElementById('stage1-acc');
-    if (!host) return;
-    const fresh = renderStage1().querySelector('.container > .accordion') || renderStage1().querySelector('.accordion');
-    // re-render whole section is simpler:
-    const section = renderStage1();
-    host.parentElement.replaceChild(section.querySelector('.container'), host.parentElement.querySelector('.container'));
   }
 
   function renderStage2() {
@@ -807,7 +771,6 @@
   }
 
   function renderStage5() {
-    // Team
     const teamGrid = el('div', { class: 'team-grid' });
     TEAM.forEach(m => {
       teamGrid.appendChild(el('div', { class: 'member' }, [
@@ -819,7 +782,6 @@
       ]));
     });
 
-    // Timeline
     const tl = el('div', { class: 'timeline' });
     TIMELINE.forEach(t => {
       tl.appendChild(el('div', { class: 'tl-item' }, [
@@ -828,19 +790,14 @@
       ]));
     });
 
-    // Risks
     const risks = el('div', { class: 'grid-2' });
     RISKS.forEach((r, i) => {
       const card = el('div', {
-        class: 'risk-card' + (state.openRisks.has(i) ? ' open' : ''),
-        onclick: () => {
-          if (state.openRisks.has(i)) state.openRisks.delete(i);
-          else state.openRisks.add(i);
-          renderStage5Content();
-        },
+        class: 'risk-card',
+        'data-risk': i,
         role: 'button',
         tabindex: '0',
-        'aria-expanded': state.openRisks.has(i) ? 'true' : 'false'
+        'aria-expanded': 'false'
       }, [
         el('div', { class: 'risk-head' }, [
           el('span', { class: 'risk-icon', html: ICONS.warn }),
@@ -866,17 +823,9 @@
         tl,
 
         el('h3', { style: 'font-size:17px;font-weight:600;margin:32px 0 4px;letter-spacing:-0.01em' }, 'Риски и минимизация'),
-        el('div', { id: 'stage5-risks' }, [risks])
+        risks
       ])
     ]);
-  }
-
-  function renderStage5Content() {
-    const host = document.getElementById('stage5-risks');
-    if (!host) return;
-    const section = renderStage5();
-    const fresh = section.querySelector('#stage5-risks');
-    host.parentElement.replaceChild(fresh, host);
   }
 
   function renderStage6() {
@@ -890,7 +839,7 @@
     });
     return el('section', { id: 'stage6' }, [
       el('div', { class: 'container' }, [
-        sectionHead('Этап 06', 'Тезисы', '7 ключевых ответов.'),
+        sectionHead('Этап 06', 'Тезисы', '6 ключевых ответов.'),
         grid
       ])
     ]);
@@ -909,6 +858,55 @@
   }
 
   // ====== HANDLERS ======
+  function setupAccordion() {
+    // Открыть первый элемент по умолчанию
+    const firstItem = document.querySelector('.acc-item[data-acc="0"]');
+    if (firstItem) firstItem.classList.add('open');
+
+    document.querySelectorAll('.acc-trigger').forEach(trigger => {
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const item = trigger.closest('.acc-item');
+        const isOpen = item.classList.contains('open');
+
+        // Закрыть все
+        document.querySelectorAll('.acc-item').forEach(it => {
+          it.classList.remove('open');
+          const btn = it.querySelector('.acc-trigger');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+
+        // Открыть текущий, если он был закрыт
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
+  function setupRisks() {
+    document.querySelectorAll('.risk-card').forEach(card => {
+      const toggle = () => {
+        const isOpen = card.classList.contains('open');
+        if (isOpen) {
+          card.classList.remove('open');
+          card.setAttribute('aria-expanded', 'false');
+        } else {
+          card.classList.add('open');
+          card.setAttribute('aria-expanded', 'true');
+        }
+      };
+      card.addEventListener('click', toggle);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+  }
+
   function setupScrollSpy() {
     const sections = NAV.map(n => document.getElementById(n.id)).filter(Boolean);
     const links = document.querySelectorAll('.nav-link');
@@ -938,6 +936,8 @@
   function init() {
     renderNav();
     render();
+    setupAccordion();
+    setupRisks();
     setupScrollSpy();
     setupProgress();
   }
