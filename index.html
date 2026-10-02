@@ -23,6 +23,14 @@
     --success-soft: #d1fae5;
     --warn: #d97706;
     --warn-soft: #fef3c7;
+    --violet: #7c3aed;
+    --violet-soft: #ede9fe;
+    --rose: #e11d48;
+    --rose-soft: #ffe4e6;
+    --amber: #d97706;
+    --amber-soft: #fef3c7;
+    --teal: #0d9488;
+    --teal-soft: #ccfbf1;
     --radius-sm: 10px;
     --radius: 14px;
     --radius-lg: 18px;
@@ -205,7 +213,7 @@
     max-height: 0; overflow: hidden;
     transition: max-height 0.35s ease;
   }
-  .acc-item.open .acc-content { max-height: 800px; }
+  .acc-item.open .acc-content { max-height: 1200px; }
   .acc-body {
     padding: 0 20px 20px 66px;
     color: var(--fg-2); font-size: 14.5px; line-height: 1.6;
@@ -372,6 +380,107 @@
   .metric-unit { font-size: 14px; color: var(--muted); font-weight: 500; margin-left: 4px; }
   .metric-hint { font-size: 13px; color: var(--muted); margin-top: 8px; }
 
+  /* Role cards */
+  .role-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px; margin-top: 24px;
+  }
+  .role-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 24px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .role-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--role-color, var(--accent));
+  }
+  .role-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .role-head {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+  }
+  .role-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--role-soft, var(--accent-soft));
+    color: var(--role-color, var(--accent));
+    display: grid; place-items: center; flex-shrink: 0;
+  }
+  .role-title {
+    font-size: 16px; font-weight: 600; color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .role-subtitle {
+    font-size: 12.5px; color: var(--muted); margin-top: 2px;
+  }
+  .role-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .role-list li {
+    position: relative; padding-left: 22px;
+    font-size: 14px; color: var(--fg-2); line-height: 1.5;
+  }
+  .role-list li::before {
+    content: ''; position: absolute; left: 0; top: 8px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--role-color, var(--accent));
+    opacity: 0.5;
+  }
+  .role-list li strong { color: var(--fg); font-weight: 600; }
+
+  /* Personalization block */
+  .personalization {
+    background: linear-gradient(135deg, #f0f9ff 0%, #eef2ff 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: var(--radius-lg); padding: 28px;
+    margin-top: 24px; position: relative; overflow: hidden;
+  }
+  .personalization::before {
+    content: ''; position: absolute; top: -50%; right: -20%;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .personalization-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+    position: relative;
+  }
+  .personalization-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--violet));
+    color: white; display: grid; place-items: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .personalization-title {
+    font-size: 18px; font-weight: 600; color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .personalization-sub {
+    font-size: 13.5px; color: var(--muted); margin-top: 2px;
+  }
+  .personalization-def {
+    font-size: 14.5px; color: var(--fg-2); line-height: 1.6;
+    padding: 14px 18px; background: rgba(255,255,255,0.7);
+    border-radius: var(--radius); border-left: 3px solid var(--violet);
+    margin-bottom: 16px; position: relative;
+  }
+  .personalization-goals {
+    position: relative;
+  }
+  .personalization-goals-title {
+    font-size: 13px; font-weight: 600; color: var(--violet);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .personalization-goals ul {
+    margin: 0; padding-left: 18px;
+  }
+  .personalization-goals li {
+    font-size: 14px; color: var(--fg-2); line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
   footer {
     border-top: 1px solid var(--border);
     padding: 40px 0; margin-top: 40px;
@@ -395,6 +504,8 @@
     .timeline { grid-template-columns: 1fr 1fr; }
     .acc-body { padding: 0 16px 16px 16px; }
     .team-grid { grid-template-columns: 1fr; }
+    .role-grid { grid-template-columns: 1fr; }
+    .personalization { padding: 20px; }
   }
   @media (max-width: 400px) {
     .timeline { grid-template-columns: 1fr; }
@@ -432,7 +543,8 @@
     { id: 'stage3', label: 'Актуальность' },
     { id: 'stage4', label: 'Цели и продукт' },
     { id: 'stage5', label: 'Ресурсы' },
-    { id: 'stage6', label: 'Тезисы' }
+    { id: 'stage6', label: 'Тезисы' },
+    { id: 'stage7', label: 'Применение' }
   ];
 
   const PASSPORT = {
@@ -444,87 +556,98 @@
   };
 
   const STAGE1 = {
-    problem: 'Отсутствие системного подхода к интеграции ИИ в ежедневную практику педагогов; разрыв между высоким интересом к нейросетям и реальным их применением для создания образовательных продуктов.',
+    problem: 'Отсутствие системного подхода к интеграции ИИ в ежедневную практику сотрудников комплекса; разрыв между высоким интересом к нейросетям и реальным их применением для создания образовательных и управленческих продуктов.',
     items: [
       {
         icon: 'alert',
         title: 'Что именно не устраивает в текущей практике?',
-        body: 'Стихийное использование ИИ (только для личных нужд или эпизодически), большие временные затраты учителей на рутину (составление отчетов, базовых конспектов, презентаций), отсутствие единых стандартов качества ИИ-контента.'
+        body: 'Стихийное использование ИИ (только для личных нужд или эпизодически), большие временные затраты сотрудников на рутину (составление отчетов, характеристик, конспектов, презентаций, сценариев), отсутствие единых стандартов качества ИИ-контента и этики его применения.'
       },
       {
         icon: 'users',
         title: 'Чьи интересы затрагиваются?',
-        body: '<ul><li><strong>Педагоги:</strong> выгорание от рутины, нехватка времени на творчество, недостаток современного, персонализированного и эффективного контента.</li><li><strong>Обучающиеся:</strong> получение шаблонного, неперсонализированного контента.</li><li><strong>Администрация:</strong> сложность аналитики и контроля, необходимость удержания статуса инновационной школы.</li></ul>'
+        body: '<ul><li><strong>Педагоги и сотрудники:</strong> перегрузка рутинными задачами, снижающая ресурс на творчество и индивидуальную работу; недостаток современных, персонализированных и эффективных инструментов.</li><li><strong>Обучающиеся:</strong> получение шаблонного, неперсонализированного контента и обратной связи.</li><li><strong>Администрация:</strong> сложность аналитики и контроля, необходимость удержания статуса инновационной школы.</li><li><strong>Родители:</strong> желание видеть индивидуальный подход к их ребёнку и прозрачную обратную связь.</li></ul>'
       },
       {
         icon: 'trend',
         title: 'Как проблема проявляется сегодня и что будет, если её не решать?',
-        body: 'Сегодня — низкая скорость создания качественного методического продукта. Если не решать — отставание от образовательных трендов, снижение мотивации педагогов и обучающихся, риски утечки данных при использовании непроверенных ИИ-сервисов.'
+        body: 'Сегодня — низкая скорость создания качественного методического и управленческого продукта, дублирование усилий, отсутствие культуры обмена опытом. Если не решать — отставание от образовательных трендов, снижение мотивации сотрудников и обучающихся, риски утечки данных при использовании непроверенных ИИ-сервисов.'
       },
       {
         icon: 'search',
         title: 'Анализ причин',
-        body: '<ul><li><strong>Кадровые / мотивационные:</strong> страх перед технологиями, отсутствие культуры горизонтального обмена опытом («каждый сам за себя»).</li><li><strong>Организационные:</strong> нет формата, где педагоги могли бы вместе создавать продукты, а не просто слушать лекции.</li><li><strong>Педагогические:</strong> дефицит навыков промпт-инжиниринга и проектирования сайтов/продуктов с нуля.</li></ul>'
+        body: '<ul><li><strong>Кадровые / мотивационные:</strong> страх перед технологиями, отсутствие культуры горизонтального обмена опытом («каждый сам за себя»).</li><li><strong>Организационные:</strong> нет формата, где сотрудники разных сфер могли бы вместе создавать продукты, а не просто слушать лекции.</li><li><strong>Педагогические:</strong> дефицит навыков промпт-инжиниринга и проектирования сайтов/продуктов с нуля.</li><li><strong>Ресурсные:</strong> отсутствие единого реестра проверенных ИИ-инструментов и этических регламентов.</li></ul>'
       },
       {
         icon: 'doc',
         title: 'Подтверждение фактами',
-        body: '<ul><li>Высокий запрос по итогам входного мастер-класса «Инструменты современного учителя» Масликова М.М., но низкий процент педагогов, внедривших ИИ в системную практику.</li><li><strong>Нормативная база:</strong><ul><li>ФГОС СОО (требования к цифровой образовательной среде);</li><li>Профстандарт педагога (ИКТ-компетентность);</li><li>Программа развития ЧОУ «Точка будущего».</li></ul></li></ul>'
+        body: '<ul><li>Высокий запрос по итогам входного мастер-класса «Инструменты современного учителя» Масликова М.М., но низкий процент сотрудников, внедривших ИИ в системную практику.</li><li><strong>Нормативная база:</strong><ul><li>ФГОС СОО (требования к цифровой образовательной среде);</li><li>Профстандарт педагога (ИКТ-компетентность);</li><li>Программа развития ЧОУ «Точка будущего».</li></ul></li></ul>'
       }
     ]
   };
 
   const STAGE2 = {
-    theme: 'Проектирование и внедрение системы использования технологий ИИ для оптимизации работы педагога и создания современных образовательных продуктов в условиях статуса инновационной школы.',
+    theme: 'Проектирование и внедрение системы использования технологий ИИ для оптимизации работы сотрудников и создания современных образовательных продуктов в условиях статуса инновационной школы.',
     formula: {
-      what: 'Повышение качества образовательных продуктов',
+      what: 'Повышение качества образовательных и управленческих продуктов',
       how: 'проектирование с использованием генеративного ИИ',
       where: 'горизонтального со-творчества сотрудников из разных сфер комплекса'
     },
     criteria: [
       { label: 'Актуальность', desc: 'ИИ — главный драйвер изменений в образовании 2024–2026 гг.' },
-      { label: 'Новизна', desc: 'Переход от пассивного потребления ИИ-сервисов к созданию собственных методических продуктов и сайтов.' },
+      { label: 'Новизна', desc: 'Переход от пассивного потребления ИИ-сервисов к созданию собственных методических продуктов, сайтов и инструментов персонализации.' },
       { label: 'Практическая значимость', desc: 'Готовые шаблоны, сайты и алгоритмы, которые экономят часы рабочего времени.' },
-      { label: 'Реализуемость', desc: 'Наличие команды единомышленников, доступность нейросетей и вспомогательных сайтов на территории РФ/ОК.' },
+      { label: 'Реализуемость', desc: 'Наличие команды единомышленников из разных сфер, доступность нейросетей и вспомогательных сайтов на территории РФ/ОК.' },
       { label: 'Соответствие стратегии', desc: 'Полное соответствие вектору ЧОУ «Точка будущего» на инновационность и создание передовой образовательной экосистемы.' }
-    ]
+    ],
+    personalization: {
+      title: 'Направление: Персонализированное обучение',
+      subtitle: 'Руководитель СПС, педагоги-психологи, тьюторы, учителя',
+      definition: 'Персонализированное обучение — подход, при котором содержание, темп и методы обучения адаптируются под индивидуальные потребности, интересы и способности обучающегося.',
+      goals: [
+        'Разработка логики применения ИИ-инструментов для реализации индивидуальных траекторий обучающихся.',
+        'Создание методического конструктора для сборки персонализированных маршрутов (ОВЗ, базовый, продвинутый, одарённый) с автоматической генерацией заданий разной сложности, критериев оценки и обратной связи.'
+      ]
+    }
   };
 
   const STAGE3 = [
     {
       icon: 'book',
       title: 'Научно-теоретическая база',
-      text: 'Концепции персонализированного обучения, теории конструктивизма (обучение через создание продукта), методология Peer-to-Peer (взаимообучение в профессиональных сообществах).'
+      text: 'Концепции персонализированного обучения, теории конструктивизма (обучение через создание продукта), методология Peer-to-Peer (взаимообучение в профессиональных сообществах), идеи дифференциации и индивидуализации образования.'
     },
     {
       icon: 'target',
       title: 'Практическая потребность',
-      text: 'Запрос педагогов на «лайфхаки» и готовые алгоритмы для экономии времени и повышения интерактивности создаваемых продуктов.'
+      text: 'Запрос сотрудников на «лайфхаки» и готовые алгоритмы для экономии времени, повышения интерактивности продуктов и реализации индивидуального подхода к каждому обучающемуся.'
     },
     {
       icon: 'spark',
       title: 'Внутренние предпосылки',
-      text: 'Сформирован пул активных педагогов, готовых работать в формате ТПГ (где каждый делится опытом, а не просто слушает куратора). Есть руководитель (Масликов М.М.) с подтвержденной экспертизой.'
+      text: 'Сформирован пул активных сотрудников из разных сфер комплекса (учителя, психологи, тьюторы, кураторы, педагоги-организаторы, руководители), готовых работать в формате ТПГ. Есть руководитель (Масликов М.М.) с подтвержденной экспертизой.'
     }
   ];
 
   const STAGE4 = {
-    goal: 'Спроектировать и внедрить банк современных образовательных продуктов (методичек, сайтов, презентаций) и регламентов автоматизации рутины, созданных педагогами школы с помощью ИИ.',
+    goal: 'Спроектировать и внедрить банк современных образовательных продуктов (методичек, сайтов, презентаций), инструментов персонализированного обучения и регламентов автоматизации рутины, созданных сотрудниками комплекса с помощью ИИ.',
     tasks: [
       'Обучить членов ТПГ и сотрудников ОК навыкам промпт-инжиниринга и анализа больших данных.',
       'Спроектировать и запустить образовательные сайты/портфолио проектов.',
-      'Разработать систему ИИ-шаблонов для ускорения методической работы.'
+      'Разработать систему ИИ-шаблонов для ускорения методической и управленческой работы.',
+      'Создать методический конструктор персонализированных маршрутов (ОВЗ, базовый, продвинутый, одарённый) с ИИ-генерацией заданий и обратной связи.'
     ],
     products: [
-      'Банк промптов для педагогов ЧОУ «Точка будущего».',
+      'Банк промптов для педагогов и сотрудников ЧОУ «Точка будущего».',
       'Пакет ИИ-методичек и интерактивных презентаций.',
-      'Реестр ИИ-инструментов для автоматизации отчетности и проверки работ.'
+      'Реестр ИИ-инструментов для автоматизации отчетности, характеристик и документооборота.',
+      'Методический конструктор персонализированных образовательных маршрутов.'
     ],
     metrics: [
       { label: 'Экономия времени', value: '−40', unit: '%', hint: 'на подготовку к урокам и отчетности' },
       { label: 'Создано продуктов', value: '50+', unit: '', hint: 'методичек, сайтов, презентаций за год' },
-      { label: 'Педагоги с ИИ', value: '80', unit: '%', hint: 'используют нейросети еженедельно' },
-      { label: 'Участников ТПГ', value: '18', unit: '', hint: 'из разных областей' }
+      { label: 'Сотрудники с ИИ', value: '80', unit: '%', hint: 'используют нейросети еженедельно' },
+      { label: 'Участников ТПГ', value: '20', unit: '', hint: 'из разных сфер комплекса' }
     ]
   };
 
@@ -533,6 +656,7 @@
     { name: 'Никулин Егор', role: 'Руководитель старшей школы · Заказчик', color: '#0f172a' },
     { name: 'Канчер Виктория', role: 'Руководитель СПС', color: '#7c3aed' },
     { name: 'Тимофеев Семен', role: 'Педагог-психолог', color: '#7c3aed' },
+    { name: 'Ильина Александра', role: 'Педагог-психолог', color: '#7c3aed' },
     { name: 'Вахромеева Наталья', role: 'Педагог-организатор', color: '#dc2626' },
     { name: 'Истомин Вадим', role: 'Педагог-организатор', color: '#dc2626' },
     { name: 'Гармышева Анастасия', role: 'Тьютор', color: '#7c3aed' },
@@ -558,19 +682,92 @@
   ];
 
   const RISKS = [
-    { title: 'Сопротивление консервативной части коллектива', mitigation: 'Демонстрация результатов через микро-кейсы.' },
+    { title: 'Сопротивление консервативной части коллектива', mitigation: 'Демонстрация результатов через микро-кейсы от коллег из разных сфер.' },
     { title: 'Нарушение этики и безопасности данных', mitigation: 'Создание и утверждение «Памятки по ИИ-гигиене» (запрет на загрузку ФИО и оценок учеников в открытые нейросети).' },
     { title: 'Выгорание участников из-за загруженности', mitigation: 'Задачи ТПГ интегрируются в текущую работу (делаем то, что и так нужно, но быстрее с помощью ИИ).' },
     { title: 'Блокировка / сбои сервисов', mitigation: 'Создание базы аналогов и оффлайн-шаблонов.' }
   ];
 
   const THESIS = [
-    { q: 'В чём проблема?', a: 'Педагоги тонут в рутине, ИИ используется хаотично, школа упускает возможности персонализации.' },
-    { q: 'Тема и смысл', a: 'ТПГ «ГенИИ» — это не курсы и лекции, а лаборатория, где участники сами создают инструменты для себя, коллег и обучающихся.' },
-    { q: 'Цель и продукт', a: 'Банк готовых ИИ-решений, сайтов и методичек, снижающих нагрузку и повышающих эффективность.' },
-    { q: 'Выгода для ЧОУ', a: 'Экономия времени педагогов, статус инновационной площадки, повышение качества образовательного контента.' },
-    { q: 'Почему это нужно сейчас?', a: 'Потому что ученики уже используют ИИ (в т.ч. для списывания). Школа должна задать стандарты и превратить ИИ из «врага» в «инструмент».' },
-    { q: 'В чём новизна?', a: 'В создании собственных интерактивных сайтов и образовательных методик, а не презентаций в формате 4:3 с картинками 2005 года.' }
+    { q: 'В чём проблема?', a: 'Сотрудники перегружены рутиной, ИИ используется хаотично, комплекс упускает возможности персонализации и автоматизации.' },
+    { q: 'Тема и смысл', a: 'ТПГ «ГенИИ» — это не курсы и лекции, а лаборатория, где участники из разных сфер сами создают инструменты для себя, коллег и обучающихся.' },
+    { q: 'Цель и продукт', a: 'Банк готовых ИИ-решений, сайтов, методичек и конструктора персонализации, снижающих нагрузку и повышающих эффективность.' },
+    { q: 'Выгода для ЧОУ', a: 'Экономия времени сотрудников, статус инновационной площадки, повышение качества образовательного контента и управленческих решений.' },
+    { q: 'Почему это нужно сейчас?', a: 'Школа должна задать стандарты и превратить ИИ из «дальнего знакомого» в «хорошего друга».' },
+    { q: 'В чём новизна?', a: 'В создании собственных интерактивных сайтов, образовательных методик и инструментов персонализации, а не презентаций в формате 4:3 с картинками 2005 года.' }
+  ];
+
+  const ROLES = [
+    {
+      title: 'Учителя-предметники',
+      subtitle: 'Создание современных уроков',
+      color: '#2563eb',
+      soft: '#dbeafe',
+      icon: 'chalkboard',
+      items: [
+        'Создание современных интерактивных уроков с ИИ-генерацией заданий разной сложности.',
+        'Автоматическая проверка домашних работ и тестов с развёрнутой обратной связью.',
+        'Генерация презентаций, конспектов и методических материалов за минуты.',
+        'Адаптация учебных материалов под разные уровни подготовки учеников (ОВЗ, базовый, продвинутый).',
+        'Создание интерактивных сайтов курсов и цифровых портфолио проектов.'
+      ]
+    },
+    {
+      title: 'Педагоги-психологи',
+      subtitle: 'Аналитика и коррекция',
+      color: '#7c3aed',
+      soft: '#ede9fe',
+      icon: 'brain',
+      items: [
+        'Анализ больших объёмов результатов тестирований с автоматической визуализацией данных.',
+        'Генерация психологических характеристик и индивидуальных рекомендаций.',
+        'Создание интерактивных материалов для коррекционных и развивающих занятий.',
+        'Обработка анкет и опросов с выделением ключевых трендов и групп риска.',
+        'Подготовка наглядных отчётов для педсоветов и родительских собраний.'
+      ]
+    },
+    {
+      title: 'Кураторы классов',
+      subtitle: 'Воспитательная работа',
+      color: '#059669',
+      soft: '#d1fae5',
+      icon: 'users',
+      items: [
+        'Составление развёрнутых характеристик учеников на основе наблюдений и данных.',
+        'Автоматизация отчётности по классу (посещаемость, успеваемость, активность).',
+        'Генерация сценариев классных часов и воспитательных мероприятий.',
+        'Создание персонализированных рекомендаций для родителей.',
+        'Ведение цифрового портфолио класса с ИИ-аналитикой динамики.'
+      ]
+    },
+    {
+      title: 'Педагоги-организаторы',
+      subtitle: 'Мероприятия и интерактив',
+      color: '#dc2626',
+      soft: '#ffe4e6',
+      icon: 'sparkles',
+      items: [
+        'Написание сценариев мероприятий и праздников с ИИ-креативом.',
+        'Создание интерактивных продуктов для мероприятий (квесты, игры, викторины).',
+        'Генерация визуального контента: афиши, баннеры, презентации событий.',
+        'Автоматизация документации по мероприятиям (отчёты, сценарии, списки).',
+        'Разработка геймифицированных форматов для школьных событий и проектов.'
+      ]
+    },
+    {
+      title: 'Руководители',
+      subtitle: 'Управление и документооборот',
+      color: '#0f172a',
+      soft: '#e4e4e7',
+      icon: 'briefcase',
+      items: [
+        'Автоматизация документооборота: приказы, распоряжения, протоколы.',
+        'Написание конспектов совещаний и встреч с выделением решений.',
+        'Аналитика образовательных показателей с ИИ-визуализацией и выводами.',
+        'Подготовка стратегических документов и программ развития комплекса.',
+        'Генерация ответов на запросы и официальную корреспонденцию.'
+      ]
+    }
   ];
 
   // ====== ICONS ======
@@ -586,7 +783,13 @@
     check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
     chevron: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
     warn: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
-    shield: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+    shield: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    user: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    chalkboard: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h20v14H2z"/><path d="M6 20h12"/><path d="M8 8h8"/><path d="M8 12h5"/></svg>',
+    brain: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>',
+    sparkles: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>',
+    briefcase: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+    personalize: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.41 6.41 2.83 2.83"/><path d="M2 12h4"/><path d="m6.41 17.59 2.83-2.83"/><path d="M12 18v4"/><path d="m17.59 17.59-2.83-2.83"/><path d="M18 12h4"/><path d="m17.59 6.41-2.83 2.83"/><circle cx="12" cy="12" r="3"/></svg>'
   };
 
   // ====== HELPERS ======
@@ -599,6 +802,9 @@
     for (const [k, v] of Object.entries(attrs)) {
       if (k === 'class') node.className = v;
       else if (k === 'html') node.innerHTML = v;
+      else if (k === 'style' && typeof v === 'object') {
+        Object.assign(node.style, v);
+      }
       else if (k.startsWith('on')) node.addEventListener(k.slice(2), v);
       else if (v !== undefined && v !== null) node.setAttribute(k, v);
     }
@@ -706,6 +912,26 @@
       ]));
     });
 
+    // Personalization block
+    const p = STAGE2.personalization;
+    const goalsList = el('ul');
+    p.goals.forEach(g => goalsList.appendChild(el('li', {}, g)));
+
+    const personalization = el('div', { class: 'personalization' }, [
+      el('div', { class: 'personalization-header' }, [
+        el('div', { class: 'personalization-icon', html: ICONS.personalize }),
+        el('div', {}, [
+          el('div', { class: 'personalization-title' }, p.title),
+          el('div', { class: 'personalization-sub' }, p.subtitle)
+        ])
+      ]),
+      el('div', { class: 'personalization-def' }, p.definition),
+      el('div', { class: 'personalization-goals' }, [
+        el('div', { class: 'personalization-goals-title' }, 'Цели направления'),
+        goalsList
+      ])
+    ]);
+
     return el('section', { id: 'stage2' }, [
       el('div', { class: 'container' }, [
         sectionHead('Этап 02', 'Формулирование темы', 'Перевод проблемы в конкретную тему с проверкой по пяти критериям.'),
@@ -715,7 +941,8 @@
         ]),
         formula,
         el('h3', { style: 'font-size:18px;font-weight:600;margin:28px 0 4px;letter-spacing:-0.01em' }, 'Проверка по критериям'),
-        criteria
+        criteria,
+        personalization
       ])
     ]);
   }
@@ -846,6 +1073,35 @@
     ]);
   }
 
+  function renderStage7() {
+    const grid = el('div', { class: 'role-grid' });
+    ROLES.forEach(role => {
+      const itemsList = el('ul', { class: 'role-list' });
+      role.items.forEach(item => {
+        itemsList.appendChild(el('li', {}, item));
+      });
+
+      grid.appendChild(el('div', { class: 'role-card' }, [
+        el('div', { class: 'role-head' }, [
+          el('div', { class: 'role-icon', html: ICONS[role.icon] || ICONS.user }),
+          el('div', {}, [
+            el('div', { class: 'role-title' }, role.title),
+            el('div', { class: 'role-subtitle' }, role.subtitle)
+          ])
+        ]),
+        itemsList
+      ]));
+    });
+
+    // Apply styles to role cards after creation
+    return el('section', { id: 'stage7' }, [
+      el('div', { class: 'container' }, [
+        sectionHead('Этап 07', 'Применение ИИ по ролям', 'Как сотрудники разных сфер комплекса смогут использовать ИИ в своей ежедневной работе. ТПГ работает не только для разработки уроков — каждый участник находит свои точки роста.'),
+        grid
+      ])
+    ]);
+  }
+
   function render() {
     const app = document.getElementById('app');
     app.innerHTML = '';
@@ -856,11 +1112,24 @@
     app.appendChild(renderStage4());
     app.appendChild(renderStage5());
     app.appendChild(renderStage6());
+    app.appendChild(renderStage7());
+
+    // Apply role card colors after DOM insertion
+    applyRoleStyles();
+  }
+
+  function applyRoleStyles() {
+    const cards = document.querySelectorAll('.role-card');
+    cards.forEach((card, i) => {
+      if (ROLES[i]) {
+        card.style.setProperty('--role-color', ROLES[i].color);
+        card.style.setProperty('--role-soft', ROLES[i].soft);
+      }
+    });
   }
 
   // ====== HANDLERS ======
   function setupAccordion() {
-    // Открыть первый элемент по умолчанию
     const firstItem = document.querySelector('.acc-item[data-acc="0"]');
     if (firstItem) firstItem.classList.add('open');
 
@@ -870,14 +1139,12 @@
         const item = trigger.closest('.acc-item');
         const isOpen = item.classList.contains('open');
 
-        // Закрыть все
         document.querySelectorAll('.acc-item').forEach(it => {
           it.classList.remove('open');
           const btn = it.querySelector('.acc-trigger');
           if (btn) btn.setAttribute('aria-expanded', 'false');
         });
 
-        // Открыть текущий, если он был закрыт
         if (!isOpen) {
           item.classList.add('open');
           trigger.setAttribute('aria-expanded', 'true');
